@@ -3,6 +3,7 @@ package com.rakesh.androidhackathonstarter.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import com.rakesh.androidhackathonstarter.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -10,14 +11,17 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    val TAG = "MainActivity"
+    private val TAG = "MainActivity"
 
     @Inject
     lateinit var magicString: String
 
+    private val mainActivityViewModel: MainActivityViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mainActivityViewModel.doSomeMagic()
         Log.v(TAG, magicString)
     }
 }
