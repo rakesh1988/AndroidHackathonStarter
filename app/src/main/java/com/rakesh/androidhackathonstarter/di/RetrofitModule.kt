@@ -1,5 +1,6 @@
 package com.rakesh.androidhackathonstarter.di
 
+import com.rakesh.androidhackathonstarter.api.StarWarsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,7 @@ class RetrofitModule {
     @Provides
     @Named("BASE_URL")
     fun provideBaseUrl(): String {
-        return "YOUR_API_URL"
+        return "https://swapi.dev/api/"
     }
 
     @Provides
@@ -27,6 +28,11 @@ class RetrofitModule {
             .baseUrl(baseUrl)
             .addConverterFactory(gsonConverterFactory)
             .build()
+    }
+
+    @Provides
+    fun provideStarWarsApi(retrofit: Retrofit): StarWarsApi {
+        return retrofit.create(StarWarsApi::class.java)
     }
 
     @Provides
